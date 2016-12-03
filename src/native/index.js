@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  DeviceEventEmitter,
   StyleSheet,
   Text,
   View,
@@ -9,7 +8,8 @@ import {
   PermissionsAndroid,
   Platform,
 } from 'react-native';
-import Beacons from 'react-native-ibeacon';
+
+import { createBeaconProximity } from '../graphql';
 
 const region = {
     identifier: 'yopo',
@@ -25,6 +25,7 @@ if (Platform.OS === 'ios') {
   Beacons.startUpdatingLocation();
 }
 
+import Beacons from 'react-native-ibeacon';
 import KontaktBeacons from 'react-native-kontaktio';
 
 export default function index() {
@@ -99,12 +100,24 @@ export default function index() {
       DeviceEventEmitter.addListener(
         'beaconsDidRange',
         (data) => {
-          console.log("HERE1");
-          console.log(data);
-          // this.setState({
-          //   beacons: data.beacons.filter(beacon => beacon.rssi < 0),
-          // });
-          // data.beacons.map(beacon => console.log('minor', beacon.minor));
+          let beacons = data.beacons;
+          beacons = beacons.sort((a,b) => {
+                if(a.uniqueID < b.uniqueID) return -1;
+                if(a.uniqueID > b.uniqueID) return 1;
+                return 0;
+          });
+          beacons = beacons.map((beacon) => {
+            return {
+              alias: beacon.uniqueID,
+              address: beacon.address,
+              rssi: beacon.rssi,
+            };
+          });
+
+          beacons.forEach((beacon) => {
+            createBeaconProximity(beacon);
+          })
+          // console.log(beacons);
         }
       );
       DeviceEventEmitter.addListener(
