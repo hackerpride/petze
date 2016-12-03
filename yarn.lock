@@ -3721,10 +3721,6 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
-react-native-alt-beacon@octavioturra/react-native-alt-beacon:
-  version "1.1.1"
-  resolved "https://codeload.github.com/octavioturra/react-native-alt-beacon/tar.gz/6cc499859634a57dc34adcd8d1ae0b536233349b"
-
 react-native-ibeacon:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-ibeacon/-/react-native-ibeacon-0.6.0.tgz#9b89af227a4a8be537effeff556e2349a36a97d8"

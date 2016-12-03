@@ -12,8 +12,23 @@ import {
   View
 } from 'react-native';
 
+import RNABeacon from 'react-native-alt-beacon';
+
 export default class hackerpride extends Component {
   render() {
+    const beacon = new RNABeacon();
+
+    beacon
+      .checkTransmissionSupported()
+      .then(() => {
+      /*...success*/
+        console.log("YAY");
+      })
+      .catch((errorCode) => {
+        console.log("ERROR");
+        console.error(beacon.errors[errorCode]);
+      });
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
