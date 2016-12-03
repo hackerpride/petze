@@ -3452,6 +3452,11 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
+octavioturra/react-native-alt-beacon:
+  name react-native-alt-beacon
+  version "1.1.1"
+  resolved "https://codeload.github.com/octavioturra/react-native-alt-beacon/tar.gz/6cc499859634a57dc34adcd8d1ae0b536233349b"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
