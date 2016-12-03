@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
+import App from './modules/app/App.react';
 import {
   AppRegistry,
   DeviceEventEmitter,
   StyleSheet,
   Text,
   View,
-  DeviceEventEmitter,
   PermissionsAndroid,
   Platform,
 } from 'react-native';
 import Beacons from 'react-native-ibeacon';
-
-const region = {
-    identifier: 'yopo',
-    uuid: 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'
-};
+import {Provider} from 'react-redux';
+import getRoutes from './routes';
 
 if (Platform.OS === 'ios') {
+  const region = {
+      identifier: 'yopo',
+      uuid: 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'
+  };
+
   Beacons.requestWhenInUseAuthorization();
 
   Beacons.startMonitoringForRegion(region);
@@ -178,18 +180,9 @@ export default function index() {
 
     render() {
       return (
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            {this.state.input}
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit index.ios.js
-          </Text>
-          <Text style={styles.instructions}>
-            Press Cmd+R to reload,{'\n'}
-            Cmd+D or shake for dev menu
-          </Text>
-        </View>
+        <Provider>
+          <App routes={getRoutes()} />
+        </Provider>
       );
     }
   }

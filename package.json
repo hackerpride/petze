@@ -13,7 +13,9 @@
     "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-ibeacon": "^0.6.0",
-    "react-native-kontaktio": "^0.2.1"
+    "react-native-kontaktio": "^0.2.1",
+    "react-native-router-flux": "^3.37.0",
+    "react-redux": "^4.4.6"
   },
   "devDependencies": {
     "babel-core": "6.4",
