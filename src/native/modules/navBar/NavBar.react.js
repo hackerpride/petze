@@ -28,7 +28,7 @@ export default class NavBar extends React.Component {
 
   renderMenuButton() {
     return (
-      <TouchableOpacity style={[styles.menuButton, state.leftButtonStyle]} onPress={this.handleMenu}>
+      <TouchableOpacity style={[styles.menuButton]} onPress={this.handleMenu}>
         <Image
           source={require('./')}
           style={styles.menuButtonImage}
@@ -38,25 +38,14 @@ export default class NavBar extends React.Component {
   }
 
   render() {
-    let state = this.props.navigationState;
-    let selected = state.children[state.index];
-    while ({}.hasOwnProperty.call(selected, 'children')) {
-      state = selected;
-      selected = selected.children[selected.index];
-    }
-
     return (
       <Animated.View
         style={[
           styles.navbar,
-          state.navigationBarStyle,
-          selected.navigationBarStyle
         ]}
       >
-        {state.children.map(this.renderTitle, this)}
         {this.renderMenuButton()}
       </Animated.View>
-
     );
   }
 }
