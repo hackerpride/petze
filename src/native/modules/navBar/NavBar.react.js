@@ -27,12 +27,16 @@ export default class NavBar extends Component {
   };
 
   renderMenuButton() {
+    // TODO: make reward points dynamic
     return (
       <TouchableOpacity style={[styles.menuButton]} onPress={this.handleMenu}>
         <Image
           source={require('./menu.png')}
           style={styles.menuButtonImage}
         />
+        <Text>
+          Herzchenkonto: 0
+        </Text>
       </TouchableOpacity>
     );
   }

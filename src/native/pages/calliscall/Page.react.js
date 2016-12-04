@@ -11,7 +11,7 @@ export default class Page extends Component {
     super(props);
     this.state = {
       motivation: false,
-      buttonText: 'DRÜCK MICH'
+      buttonText: 'PETZEN!'
     };
   }
 

@@ -2,8 +2,9 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   navbar: {
-    top: 0,
     height: 70,
+    width: 200,
+    top: 0,
     right: 0,
     left: 0,
     position: 'absolute',
