@@ -6,11 +6,14 @@ import {
   Text,
   View,
   PermissionsAndroid,
+  DeviceEventEmitter,
   Platform,
 } from 'react-native';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
 import { createBeaconProximity } from '../graphql';
+import createCredentialsStore from './helpers/createCredentialsStore';
+import configureStore from '../common/configureStore';
 
 if (Platform.OS === 'ios') {
   const region = {
@@ -30,6 +33,16 @@ import Beacons from 'react-native-ibeacon';
 import KontaktBeacons from 'react-native-kontaktio';
 
 export default function index() {
+
+  const initialState = {
+    device: {
+      isNative: true,
+      isMobile: true
+    }
+  };
+
+  const credentialsStore = createCredentialsStore();
+  const store = configureStore({initialState, credentialsStore});
 
   const styles = StyleSheet.create({
     container: {
@@ -188,11 +201,11 @@ export default function index() {
         console.log("ERROR");
         console.warn(err)
       }
-    }
+    };
 
     render() {
       return (
-        <Provider>
+        <Provider store={store}>
           <App routes={getRoutes()} />
         </Provider>
       );

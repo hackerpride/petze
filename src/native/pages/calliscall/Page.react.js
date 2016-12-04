@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {View, ScrollView, Image, Text} from 'react-native';
+import {View, TouchableHighlight, ScrollView, Image, Text} from 'react-native';
 
 export default class Page extends Component {
 
@@ -7,31 +7,19 @@ export default class Page extends Component {
     routes: PropTypes.object.isRequired,
   };
 
-  componentDidMount() {
-    this.switchPage();
-  }
-
-  switchPage() {
-    const {routes} = this.context;
-    setTimeout(() => {
-      routes.calliscall();
-    }, 3000);
-  }
-
   render() {
     const {routes} = this.context;
 
     const style = {
       biggy: {
-        paddingTop: 90,
-        paddingLeft: 60,
-        paddingRight: 60,
+        paddingTop: 60,
       },
       headline: {
-        fontSize: 70,
+        fontSize: 30,
         fontWeight: 'bold',
         color: '#000000',
-        marginBottom: 20
+        textAlign: 'center',
+        marginBottom: 40
       },
       subheadline: {
         fontSize: 36,
@@ -56,19 +44,39 @@ export default class Page extends Component {
           flex: 1
         }}
       >
-        <ScrollView style={style.biggy}>
+        <ScrollView style={style.biggy} centerContent>
           <Text style={style.headline}>
-            PETZE
+            Stiller Alarm
           </Text>
-          <Text style={style.subheadline}>
-            MEYK SE
+          <Text
+            style={{
+              textAlign: 'center'
+            }}
+          >
+            Push a button if a bad musician is around you.
           </Text>
-          <Text style={style.subheadline}>
-            BVG
-          </Text>
-          <Text style={style.subheadline}>
-            GREIT ÄGENN
-          </Text>
+          <TouchableHighlight style={{
+            marginTop: 40,
+            marginLeft: 120,
+            backgroundColor: '#E92E2E',
+            height: 120,
+            width: 120,
+            borderRadius: 60,
+            flexDirection:'row',
+            justifyContent:'center',
+            alignItems:'center'
+          }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: '#FFF',
+                fontWeight: 'bold',
+                textAlign: 'center'
+              }}
+            >
+              DRÜCK MICH
+            </Text>
+          </TouchableHighlight>
         </ScrollView>
         <View
           style={style.footer}

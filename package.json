@@ -10,13 +10,15 @@
     "apollo-client": "^0.5.10",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-es2017": "^6.16.0",
+    "immutable": "^3.8.1",
     "install": "^0.8.2",
     "react": "15.4.1",
     "react-native": "0.38.0",
     "react-native-ibeacon": "^0.6.0",
     "react-native-kontaktio": "^0.2.1",
     "react-native-router-flux": "^3.37.0",
-    "react-redux": "^4.4.6"
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-core": "6.4",
