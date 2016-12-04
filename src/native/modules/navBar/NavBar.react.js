@@ -27,16 +27,8 @@ export default class NavBar extends React.Component {
   };
 
   renderMenuButton() {
-    const state = this.props.navigationState;
-    const childState = state.children[state.index];
-    const onPress = Actions.pop;
-
-    if (state.index === 0) {
-      return null;
-    }
-
     return (
-      <TouchableOpacity style={[styles.menuButton, state.leftButtonStyle]} onPress={onPress}>
+      <TouchableOpacity style={[styles.menuButton, state.leftButtonStyle]} onPress={this.handleMenu}>
         <Image
           source={require('./')}
           style={styles.menuButtonImage}
