@@ -73,13 +73,10 @@ export default class Page extends Component {
         <View
           style={style.footer}
         >
-          <Text
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            text
-          </Text>
+          <Image
+            source={require('./bvg-logo-mit-rand-1200-1200.png')}
+            style={{width: 50, height: 50}}
+          />
         </View>
       </View>
     );

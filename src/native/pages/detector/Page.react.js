@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {View, TouchableHighlight, ScrollView, Image, Text} from 'react-native';
+import {View, ScrollView, Image, Text} from 'react-native';
 
 export default class Page extends Component {
 
@@ -10,25 +10,13 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      motivation: false,
-      buttonText: 'DRÜCK MICH'
+      riskLevel: false,
     };
-  }
-
-  onPressButton = () => {
-    const {routes} = this.context;
-    this.setState({
-      motivation: true,
-      buttonText: 'DANKE'
-    });
-    setTimeout(() => {
-      routes.detector();
-    }, 1000);
   }
 
   render() {
     const {routes} = this.context;
-    const {motivation, buttonText} = this.state;
+    const {riskLevel} = this.state;
 
     const style = {
       biggy: {
@@ -39,7 +27,7 @@ export default class Page extends Component {
         fontWeight: 'bold',
         color: '#000000',
         textAlign: 'center',
-        marginBottom: 40
+        marginBottom: 10
       },
       fancyHeadline: {
         fontSize: 30,
@@ -58,7 +46,7 @@ export default class Page extends Component {
         backgroundColor: '#FFFFFF',
         borderTopWidth: 1,
         borderTopColor: '#979797',
-        height: 100,
+        height: 80,
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center'
@@ -74,55 +62,39 @@ export default class Page extends Component {
       >
         <ScrollView style={style.biggy} centerContent>
           <Text style={style.headline}>
-            Stiller Alarm
+            Detektor
           </Text>
           <Text
             style={{
               textAlign: 'center'
             }}
           >
-            Push a button if a bad musician is around you.
+            Du bist hier: <Text style={{fontStyle: 'italic', fontWeight: 'bold'}} >Schlesisches Tor</Text>
           </Text>
-          <TouchableHighlight
+          <Text
             style={{
-              marginTop: 40,
-              marginLeft: 120,
-              backgroundColor: '#E92E2E',
-              height: 120,
-              width: 120,
-              borderRadius: 60,
-              flexDirection:'row',
-              justifyContent:'center',
-              alignItems:'center'
+              textAlign: 'center',
+              marginTop: 10,
+              padding: 20
             }}
-            underlayColor="#808080"
-            onPress={this.onPressButton}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                color: '#FFF',
-                fontWeight: 'bold',
-                textAlign: 'center'
-              }}
-            >
-              {buttonText}
-            </Text>
-          </TouchableHighlight>
-          {motivation ?
-            <Text style={style.fancyHeadline}>
-              Du bist spitze!{"\n"}
-              Echt jetzt!
-            </Text> :
-            null
-          }
+            {!riskLevel ?
+              'Kein Straßenmusiker in deiner Nähe genieße die Ruhe :-)' :
+              'Aufpassen versuch die roten Wagons zu vermeiden.'
+            }
+          </Text>
         </ScrollView>
         <View
           style={style.footer}
         >
           <Image
             source={require('./bvg-logo-mit-rand-1200-1200.png')}
-            style={{width: 50, height: 50}}
+            style={{
+              position: 'relative',
+              top: -30,
+              width: 70,
+              height: 70
+            }}
           />
         </View>
       </View>
