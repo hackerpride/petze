@@ -23,7 +23,6 @@ export default class Page extends Component {
 
   render() {
     const {routes} = this.context;
-    const {motivation, buttonText} = this.state;
 
     const style = {
       biggy: {
@@ -81,7 +80,6 @@ export default class Page extends Component {
             <TouchableHighlight
               style={{
                 marginTop: 40,
-                marginLeft: 120,
                 backgroundColor: '#000',
                 height: 80,
                 width: 120,
@@ -103,7 +101,7 @@ export default class Page extends Component {
             <TouchableHighlight
               style={{
                 marginTop: 40,
-                marginLeft: 120,
+                marginLeft: 20,
                 backgroundColor: '#000',
                 height: 80,
                 width: 120,
@@ -123,13 +121,6 @@ export default class Page extends Component {
               </Text>
             </TouchableHighlight>
           </View>
-          {motivation ?
-            <Text style={style.fancyHeadline}>
-              Du bist spitze!{"\n"}
-              Echt jetzt!
-            </Text> :
-            null
-          }
         </ScrollView>
         <View
           style={style.footer}

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 import {Actions} from 'react-native-router-flux';
 import {
   Text,
@@ -10,12 +10,11 @@ import {
 
 import styles from './NavBar.styles';
 
-export default class NavBar extends React.Component {
+export default class NavBar extends Component {
 
-  static propTypes = {
-    position: PropTypes.object,
-    navigationState: PropTypes.object,
-  }
+  static contextTypes = {
+    routes: PropTypes.object.isRequired,
+  };
 
   constructor() {
     super();
