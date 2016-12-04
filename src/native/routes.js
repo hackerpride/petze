@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import NavBar from './modules/navBar';
 
 import HomePage from './pages/home/Page.react';
+import MenuPage from './pages/menu/Page.react';
 import CallIsCallPage from './pages/calliscall/Page.react';
 import DetectorPage from './pages/detector/Page.react';
 
@@ -15,6 +16,7 @@ export default function getRoutes() {
       <Scene key="root" hideNavBar>
         <Scene key="nav" navBar={NavBar} >
           <Scene key="home" component={HomePage} initial />
+          <Scene key="menu" component={MenuPage} />
           <Scene key="calliscall" component={CallIsCallPage} />
           <Scene key="detector" component={DetectorPage} />
         </Scene>

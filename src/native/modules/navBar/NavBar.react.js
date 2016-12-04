@@ -24,13 +24,14 @@ export default class NavBar extends React.Component {
 
   handleMenu = () => {
     const {routes} = this.context;
+    routes.menu();
   };
 
   renderMenuButton() {
     return (
       <TouchableOpacity style={[styles.menuButton]} onPress={this.handleMenu}>
         <Image
-          source={require('./')}
+          source={require('./menu.png')}
           style={styles.menuButtonImage}
         />
       </TouchableOpacity>
