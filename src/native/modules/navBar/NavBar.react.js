@@ -44,6 +44,7 @@ export default class NavBar extends Component {
           styles.navbar,
         ]}
       >
+        {/* {this.renderMenuButton.bind(this)} */}
         {this.renderMenuButton()}
       </Animated.View>
     );

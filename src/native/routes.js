@@ -1,7 +1,11 @@
 import React from 'react';
 import {Router, Scene} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import NavBar from './modules/navBar';
+// <<<<<<< Updated upstream
+// import NavBar from './modules/navBar';
+// =======
+import NavBar from './modules/navBar/NavBar.react';
+// >>>>>>> Stashed changes
 
 import HomePage from './pages/home/Page.react';
 import MenuPage from './pages/menu/Page.react';

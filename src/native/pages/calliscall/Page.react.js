@@ -23,7 +23,7 @@ export default class Page extends Component {
     });
     setTimeout(() => {
       routes.detector();
-    }, 1000);
+    }, 2000);
   }
 
   render() {

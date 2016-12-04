@@ -11,23 +11,9 @@ import {
 } from 'react-native';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import { createBeaconProximity } from '../graphql';
+import { createBeaconProximity, report } from '../graphql';
 import createCredentialsStore from './helpers/createCredentialsStore';
 import configureStore from '../common/configureStore';
-
-if (Platform.OS === 'ios') {
-  const region = {
-      identifier: 'yopo',
-      uuid: 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'
-  };
-
-  Beacons.requestWhenInUseAuthorization();
-
-  Beacons.startMonitoringForRegion(region);
-  Beacons.startRangingBeaconsInRegion(region);
-
-  Beacons.startUpdatingLocation();
-}
 
 import Beacons from 'react-native-ibeacon';
 import KontaktBeacons from 'react-native-kontaktio';
@@ -108,7 +94,20 @@ export default function index() {
             //    .accuracy - The accuracy of a beacon
           }
         );
+
+        // const region = {
+        //     identifier: 'yopo',
+        //     uuid: 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'
+        // };
+        //
+        // Beacons.requestWhenInUseAuthorization();
+        //
+        // Beacons.startMonitoringForRegion(region);
+        // Beacons.startRangingBeaconsInRegion(region);
+        //
+        // Beacons.startUpdatingLocation();
       }
+      this.requestPermissions();
 
       KontaktBeacons.initKontaktSDKWithApiKey('MY_KONTAKTIO_API_KEY');
       DeviceEventEmitter.addListener(
@@ -128,16 +127,21 @@ export default function index() {
             };
           });
 
-          beacons.forEach((beacon) => {
-            createBeaconProximity(beacon);
-          })
-          // console.log(beacons);
+          continousTracking = false;
+          if (continousTracking) {
+            beacons.forEach((beacon) => {
+              createBeaconProximity(beacon);
+            })
+            // console.log(beacons);
+          }
+          this.trackReportLocation(beacons);
         }
       );
       DeviceEventEmitter.addListener(
         'scanInitStatus',
         (data) => {
           console.log("HERE2");
+          console.log(data);
           // this.setState({ scanInitStatus: data.status });
         }
       );
@@ -145,6 +149,7 @@ export default function index() {
         'scanStatus',
         (data) => {
           console.log("HERE3");
+          console.log(data);
           // this.setState({ scanStatus: data.scanStatus });
         }
       );
@@ -156,7 +161,7 @@ export default function index() {
         minor: KontaktBeacons.ANY_MINOR,
       };
       const scanContext = {
-        iBeaconDevicesUpdateCallbackInterval: 100,
+        iBeaconDevicesUpdateCallbackInterval: 5000,
         eddystoneDevicesUpdateCallbackInterval: 1000,
         iBeaconDistanceSort: KontaktBeacons.SORT_DESC,
         eddystoneDistanceSort: KontaktBeacons.SORT_ASC,
@@ -169,9 +174,8 @@ export default function index() {
         const granted = await PermissionsAndroid.requestPermission(
           PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
           {
-            'title': 'Cool Photo App Camera Permission',
-            'message': 'Cool Photo App needs access to your camera ' +
-                       'so you can take awesome pictures.'
+            'title': 'Position information',
+            'message': 'We need permissions so we can accurately locate musicians.'
           }
         )
         if (granted) {
@@ -187,9 +191,8 @@ export default function index() {
         const granted = await PermissionsAndroid.requestPermission(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
-            'title': 'Cool Photo App Camera Permission',
-            'message': 'Cool Photo App needs access to your camera ' +
-                       'so you can take awesome pictures.'
+            'title': 'Position information',
+            'message': 'We need permissions so we can accurately locate musicians.'
           }
         )
         if (granted) {
@@ -202,6 +205,11 @@ export default function index() {
         console.warn(err)
       }
     };
+
+    trackReportLocation(proximities = []) {
+      const userid = "ciwaffi5t6y1101071vnr5ew7";
+      report(userid, proximities);
+    }
 
     render() {
       return (

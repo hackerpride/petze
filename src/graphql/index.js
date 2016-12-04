@@ -17,12 +17,30 @@ client = () => {
   });
 }
 
-export function createBeaconProximity(variables) {
+export function createRating(body) {
   const ql = client();
 
   const mutation = gql`
-    mutation($address: String!, $alias: String, $rssi: Int!) {
-      createBeaconProximity(address: $address, alias: $alias, rssi: $rssi) {
+    mutation {
+      createRating {
+        id
+      }
+    }
+  `
+
+  return ql.mutate({
+    mutation,
+    null,
+    forceFetch: true,
+  });
+}
+
+export function createUserPosition(variables) {
+  const ql = client();
+
+  const mutation = gql`
+    mutation($userId: ID!, $ratingId: ID!, $recordedAt: DateTime!) {
+      createUserPosition(userId: $userId, ratingId: $ratingId, recordedAt: $recordedAt) {
         id
       }
     }
@@ -33,4 +51,61 @@ export function createBeaconProximity(variables) {
     variables,
     forceFetch: true,
   });
+}
+
+export function createBeaconProximity(variables) {
+  const ql = client();
+
+  const mutation = gql`
+    mutation($address: String!, $alias: String, $rssi: Int!, $userpositionId: ID) {
+      createBeaconProximity(address: $address, alias: $alias, rssi: $rssi, userpositionId: $userpositionId) {
+        id
+      }
+    }
+  `
+
+  return ql.mutate({
+    mutation,
+    variables,
+    forceFetch: true,
+  });
+}
+
+export function report(userid, proximities) {
+  const rating = createRating();
+  rating
+  .then((res) => {
+    const ratingId = res.data.createRating.id;
+
+    createUserPosition({
+      ratingId,
+      userId: userid,
+      recordedAt: new Date(),
+    })
+    .then((res) => {
+      const positionId = res.data.createUserPosition.id;
+
+      proximities.forEach((proximity) => {
+        createBeaconProximity({
+          address: proximity.address,
+          alias: proximity.alias,
+          rssi: proximity.rssi,
+
+          userpositionId: positionId,
+        })
+        .then((res) => {
+          // const positionId = res.data.createUserPosition.id;
+        })
+        .catch((err) => {
+          console.log("ERROR: ", err);
+        })
+      });
+    })
+    .catch((err) => {
+      console.log("ERROR: ", err);
+    })
+  })
+  .catch((err) => {
+    console.log("ERROR: ", err);
+  })
 }
